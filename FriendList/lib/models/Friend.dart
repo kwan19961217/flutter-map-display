@@ -1,18 +1,18 @@
-class Friends {
+class Friend {
   final String lastName;
   final String firstName;
   final double latitude;
   final double longitude;
 
-  Friends({
+  Friend({
     required this.lastName,
     required this.firstName,
     required this.latitude,
     required this.longitude,
   });
 
-  factory Friends.fromJson(Map<String, dynamic> json) {
-    return Friends(
+  factory Friend.fromJson(Map<String, dynamic> json) {
+    return Friend(
       lastName: json["name"]["last"] != null ? json["name"]["last"] : "",
       firstName: json["name"]["first"] != null ? json["name"]["first"] : "",
       latitude: json["location"]["latitude"] != null

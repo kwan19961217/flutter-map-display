@@ -1,5 +1,5 @@
-name: ex2
-description: A new Flutter project.
+name: friend_list
+description: A Flutter project showing a friendlist and accessing friends' location.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
