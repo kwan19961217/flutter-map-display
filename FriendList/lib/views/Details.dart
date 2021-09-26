@@ -3,16 +3,15 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class Details extends StatelessWidget {
-  final String name;
-  final double latitude;
-  final double longitude;
+  final String _name;
+  final double _latitude;
+  final double _longitude;
 
-  const Details(
-      {required this.name,
-      required this.latitude,
-      required this.longitude,
-      Key? key})
-      : super(key: key);
+  const Details({name, latitude, longitude, Key? key})
+      : _name = name,
+        _latitude = latitude,
+        _longitude = longitude,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class Details extends StatelessWidget {
               child: FlutterMap(
                 //Map Starting Point
                 options: MapOptions(
-                  center: LatLng(latitude, longitude),
+                  center: LatLng(_latitude, _longitude),
                   zoom: 15.0,
                 ),
                 layers: [
@@ -42,11 +41,12 @@ class Details extends StatelessWidget {
                   MarkerLayerOptions(
                     markers: [
                       Marker(
-                        width: 28.0,
-                        height: 28.0,
-                        point: LatLng(latitude, longitude),
+                        width: 32.0,
+                        height: 32.0,
+                        point: LatLng(_latitude, _longitude),
                         builder: (ctx) => Container(
-                          child: Icon(Icons.location_on, color: Colors.red),
+                          child: Icon(Icons.location_on,
+                              color: Colors.red, size: 32),
                         ),
                       ),
                     ],
@@ -59,7 +59,7 @@ class Details extends StatelessWidget {
             Card(
                 child: ListTile(
               leading: Icon(Icons.account_circle, color: Colors.blue, size: 32),
-              title: Text(name, style: TextStyle(fontSize: 18)),
+              title: Text(_name, style: TextStyle(fontSize: 18)),
             ))
           ]));
     });

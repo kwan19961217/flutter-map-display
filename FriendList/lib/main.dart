@@ -6,7 +6,7 @@ import 'package:friend_list/models/Friend.dart';
 import 'package:friend_list/views/Details.dart';
 import 'package:friend_list/views/HomePage.dart';
 
-Future<List<Friend>> fetchFriends() async {
+Future<List<Friend>> _fetchFriends() async {
   final response = await http.get(
       Uri.parse('https://api.json-generator.com/templates/Xp8zvwDP14dJ/data'),
       headers: {
@@ -19,7 +19,6 @@ Future<List<Friend>> fetchFriends() async {
     print(friendList);
     final cleanList =
         friendList.map((friend) => Friend.fromJson(friend)).toList();
-
     return cleanList;
   } else
     throw Exception('Failed to load Friends.');
@@ -52,14 +51,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late Future<List<Friend>> friends;
+  late Future<List<Friend>> _friends;
 
   @override
   void initState() {
     setState(() {
       super.initState();
     });
-    friends = fetchFriends();
+    _friends = _fetchFriends();
   }
 
   void _pushDetails(Friend friend) {
@@ -74,6 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return HomePage(friends: friends, buttonAction: _pushDetails);
+    return HomePage(friends: _friends, buttonAction: _pushDetails);
   }
 }
