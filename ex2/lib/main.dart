@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:ex2/view/Details.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -63,11 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
     friends = fetchFriends();
   }
 
-  void _pushDetails(String name) {
+  void _pushDetails(Friends friend) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
-      return Scaffold(
-          appBar: AppBar(title: Text('Your Friend')), body: Text(name));
+      return Details(
+          name: '${friend.firstName} ${friend.lastName}',
+          latitude: friend.latitude,
+          longitude: friend.longitude);
     }));
   }
 
@@ -91,10 +93,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       return Card(
                           child: ListTile(
-                              leading: FlutterLogo(),
-                              title: Text(name),
+                              leading: Icon(Icons.account_circle,
+                                  color: Colors.blue, size: 32),
+                              title: Text(name, style: TextStyle(fontSize: 18)),
                               onTap: () {
-                                _pushDetails(name);
+                                _pushDetails(snapshot.data![index]);
                               }));
                     },
                   );
